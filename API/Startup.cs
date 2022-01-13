@@ -33,7 +33,7 @@ namespace shuconnapi
 
             services.AddCors(c => c.AddPolicy("CorsPolicy", policy =>
             {
-                policy.WithOrigins("http://localhost:4200", "https://shuconnapi.azurewebsites.net")
+                policy.WithOrigins("https://localhost:4200")
                 .AllowAnyMethod()
                 .AllowAnyOrigin()
                 .AllowAnyHeader();
