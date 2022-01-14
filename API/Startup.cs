@@ -1,5 +1,9 @@
 using API.Data;
+using API.Extensions;
+using API.Interfaces;
+using API.Services;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.VisualBasic;
 using System;
@@ -27,10 +32,7 @@ namespace shuconnapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options =>
-                 options.UseSqlite(
-                     _config.GetConnectionString("DatingAppConnection")));
-
+            services.AddApplicationService(_config);
             services.AddCors(c => c.AddPolicy("CorsPolicy", policy =>
             {
                 policy.WithOrigins("https://localhost:4200")
@@ -39,28 +41,8 @@ namespace shuconnapi
                 .AllowAnyHeader();
             }));
 
-
-            services.Configure<IdentityOptions>(options =>
-            {
-                // Password settings.
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 6;
-                options.Password.RequiredUniqueChars = 0;
-
-                // Lockout settings.
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                options.Lockout.MaxFailedAccessAttempts = 20;
-                options.Lockout.AllowedForNewUsers = true;
-
-                // User settings.
-                options.User.AllowedUserNameCharacters =
-                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                options.User.RequireUniqueEmail = false;
-            });
-
+            services.AddIdentityService(_config);
+           
 
             services.AddControllers();
 
