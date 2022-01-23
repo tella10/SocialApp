@@ -1,0 +1,32 @@
+<ng-container>
+  <button (click)="get404error()" mat-button>
+    <mat-icon aria-label="label1">icon</mat-icon>
+    <span>404 Error</span>
+  </button>
+  <button (click)="get400error()" mat-button>
+    <mat-icon aria-label="label1">icon</mat-icon>
+    <span>400 Error</span>
+  </button>
+  <button (click)="get500error()" mat-button>
+    <mat-icon aria-label="label1">icon</mat-icon>
+    <span>500 Error</span>
+  </button>
+  <button (click)="get401error()" mat-button>
+    <mat-icon aria-label="label1">icon</mat-icon>
+    <span>401 Error</span>
+  </button>
+  <button (click)="get400Validationerror()" mat-button>
+    <mat-icon aria-label="label1">icon</mat-icon>
+    <span>400 Validation Error</span>
+  </button>
+
+
+  <div class="row mt-5" *ngIf="validationError.length > 0">
+    <ul class="text-danger">
+      <li *ngFor="let error of validationError">
+        {{error}}
+      </li>
+    </ul>
+  </div>
+</ng-container>
+

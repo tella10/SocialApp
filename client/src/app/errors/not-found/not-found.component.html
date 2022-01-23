@@ -1,0 +1,15 @@
+<mat-card class="not-found-card">
+  <mat-card-subtitle></mat-card-subtitle>
+  <mat-card-title >NOT FOUND</mat-card-title>
+  <mat-card-content >
+    <p>{{ longText }}</p>
+  </mat-card-content>
+  <mat-divider inset></mat-divider>
+  <mat-card-actions>
+    <button class="btn btn-primary"  routerLink="/" mat-button>Home</button>
+    <button class="btn btn-secondary" (click)="back()" mat-button>Back</button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

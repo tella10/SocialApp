@@ -1,0 +1,37 @@
+<div class="container mt-5" *ngIf="!(accountService.currentUser$ | async)">
+
+  <div class="row" style='text-align: center;'>
+    <h1>Start Your Project</h1>
+    <p class="lead">Come on in to start your project... all you need to do is sign up!</p>
+
+    <div *ngIf="!loginMode" style='text-align: center;'>
+        <div *ngIf="!registerMode" class="justify-content-center">
+            <button  (click)="registerToggle()" class="btn btn-primary btn-lg me-2">Register</button>
+            <!-- <button class="btn btn-info btn-lg ml-4">Learn more</button>  -->
+        </div>
+    </div>
+
+    <div *ngIf="!registerMode" style='text-align: center;'>
+      <div *ngIf="!loginMode" class='mt-2 justify-content-center'>
+        <button  (click)="loginToggle()" class="btn btn-info btn-lg me-2">Login</button>
+      </div>
+    </div>
+  </div>
+
+    <div *ngIf="registerMode" class="container">
+        <div class="row justify-content-center">
+            <div class="col-4">
+              <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="loginMode" class="container">
+      <div class="row justify-content-center">
+          <div class="col-4">
+            <app-login (cancelLogin)="cancelLoginMode($event)"></app-login>
+          </div>
+      </div>
+  </div>
+</div>
+
